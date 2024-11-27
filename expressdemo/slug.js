@@ -8,12 +8,9 @@ const users = [
   { id: 3, name: "Neuman" },
 ];
 
-app.get("/", (req, res) => {
-  res.send("Hello World! welcome");
-});
-
-app.get("/api/users", (req, res) => {
-  res.json(users);
+app.get("/api/users/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  res.json(users.filter((user) => user.id === id));
 });
 
 app.listen(port, () => {
