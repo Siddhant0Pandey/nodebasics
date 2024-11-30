@@ -12,6 +12,11 @@ app.get("/api/users/:id", (req, res) => {
   const id = parseInt(req.params.id);
   res.json(users.filter((user) => user.id === id));
 });
+app.get("/api/name/:name", (req, res) => {
+  const name = req.params.name;
+  console.log(name);
+  res.json(users.filter((user) => user.name === name));
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

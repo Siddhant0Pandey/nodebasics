@@ -6,6 +6,7 @@ const users = [
   { id: 1, name: "John" },
   { id: 2, name: "Von" },
   { id: 3, name: "Neuman" },
+  { id: 4, name: "SOn" },
 ];
 
 app.get("/", (req, res) => {
