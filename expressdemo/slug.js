@@ -16,7 +16,6 @@ app.get("/api/users/:id", (req, res) => {
 app.get("/api/name/:name", (req, res) => {
   const name = req.params.name;
   const filteredUsers = users.filter((user) => user.name === name);
-
   if (filteredUsers.length === 0) {
     res.status(404).json({ message: "User not found" });
   } else {
