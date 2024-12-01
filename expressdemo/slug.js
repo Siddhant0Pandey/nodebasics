@@ -12,10 +12,16 @@ app.get("/api/users/:id", (req, res) => {
   const id = parseInt(req.params.id);
   res.json(users.filter((user) => user.id === id));
 });
+
 app.get("/api/name/:name", (req, res) => {
   const name = req.params.name;
-  console.log(name);
-  res.json(users.filter((user) => user.name === name));
+  const filteredUsers = users.filter((user) => user.name === name);
+
+  if (filteredUsers.length === 0) {
+    res.status(404).json({ message: "User not found" });
+  } else {
+    res.json(filteredUsers);
+  }
 });
 
 app.listen(port, () => {
