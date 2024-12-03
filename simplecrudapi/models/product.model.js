@@ -7,17 +7,17 @@ const ProductSchema = mongoose.Schema({
   },
   quantity: {
     type: Number,
-    required: true,
     default: 0,
+    min: [0, "Quantity cannot be negative"],
   },
   price: {
     type: Number,
-    required: true,
     default: 0,
+    min: [0, "Price cannot be negative"],
   },
   image: {
     type: String,
-    required: true,
+    required: [false, "Image URL is required"],
   },
 });
 
