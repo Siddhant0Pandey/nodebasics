@@ -7,10 +7,6 @@ const mongoose = require("mongoose");
 const uri = process.env.DATABASE_URL;
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("tihs is home page");
-});
-
 app.use(express.json());
 
 app.post("/api/products", async (req, res) => {

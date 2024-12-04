@@ -15,6 +15,10 @@ const ProductSchema = mongoose.Schema({
     default: 0,
     min: [0, "Price cannot be negative"],
   },
+  category: {
+    type: String,
+    required: false,
+  },
   image: {
     type: String,
     required: [false, "Image URL is required"],
