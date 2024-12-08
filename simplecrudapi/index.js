@@ -10,6 +10,8 @@ const app = express();
 
 app.use(express.json());
 
+// create the api
+
 app.post("/api/products", async (req, res) => {
   try {
     const product = await Product.create(req.body);
@@ -20,6 +22,31 @@ app.post("/api/products", async (req, res) => {
   }
 });
 
+// retrieve
+
+app.get("/api/products/", async (req, res) => {
+  try {
+    const product = await Product.find({});
+    res.status(200).json(product);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+app.get("/api/products/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const proudct = await Product.findById(id);
+    if (!proudct) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    res.status(200).json(proudct);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+//
 app.post("/api/users", async (req, res) => {
   try {
     const users = await Users.create(req.body);
