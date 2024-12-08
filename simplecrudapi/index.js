@@ -10,7 +10,7 @@ const app = express();
 
 app.use(express.json());
 
-// create the api
+// create the product
 
 app.post("/api/products", async (req, res) => {
   try {
@@ -59,6 +59,22 @@ app.put("/api/product/:id", async (req, res) => {
     const updatedProduct = await Product.findById(id);
 
     res.status(200).json(updatedProduct);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// delete the product
+app.delete("/api/product/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const product = await Product.findByIdAndDelete(id, req.body);
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.status(200).json({ message: "Product deleted succesfully" });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
