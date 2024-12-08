@@ -33,14 +33,32 @@ app.get("/api/products/", async (req, res) => {
   }
 });
 
-app.get("/api/products/:id", async (req, res) => {
+app.get("/api/product/:id", async (req, res) => {
   try {
-    const { id } = req.params;
-    const proudct = await Product.findById(id);
-    if (!proudct) {
+    const id = req.params.id;
+    const product = await Product.findById(id);
+    if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
-    res.status(200).json(proudct);
+    res.status(200).json(product);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// update
+app.put("/api/product/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const product = await Product.findByIdAndUpdate(id, req.body);
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    const updatedProduct = await Product.findById(id);
+
+    res.status(200).json(updatedProduct);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
